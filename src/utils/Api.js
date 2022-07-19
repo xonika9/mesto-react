@@ -16,12 +16,12 @@ class Api {
       body: JSON.stringify({ avatar: formValues.avatar }),
     }).then(this._checkResponse);
   };
-  getProfileInfo = () => {
+  getUserInfo = () => {
     return fetch(`${this._baseUrl}users/me`, {
       headers: this._headers,
     }).then(this._checkResponse);
   };
-  setProfileInfo = (profileInfo) => {
+  setUserInfo = (profileInfo) => {
     return fetch(`${this._baseUrl}users/me`, {
       method: 'PATCH',
       headers: this._headers,
