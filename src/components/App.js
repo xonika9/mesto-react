@@ -27,6 +27,18 @@ function App() {
   function handleCardClick({ src, title }) {
     setSelectedCard({ src, title });
   }
+  function handleCardLike(card) {
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    api
+      .toggleLike(card._id, isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => console.log(err));
+  }
   return (
     <div className='page'>
       <div className='page__container'>
