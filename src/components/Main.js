@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import api from '../utils/Api';
+import { useContext } from 'react';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 import Card from './Card';
 function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   const [userName, setUserName] = useState('');
