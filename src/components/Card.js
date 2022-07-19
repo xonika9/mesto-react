@@ -10,7 +10,8 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
     isLiked ? 'card__like_active' : ''
   }`;
   function handleClick() {
-    onCardClick({ src, title });
+    onCardClick({ src: card.link, title: card.name });
+  }
   }
   return (
     <div className='card'>
