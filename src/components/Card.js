@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import CurrentUserContext from '../contexts/CurrentUserContext';
+function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(CurrentUserContext);
   const isOwn = card.owner._id === currentUser._id;
   const cardDeleteButtonClassName = `card__remove${
