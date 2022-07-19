@@ -1,11 +1,7 @@
 import { useContext } from 'react';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import Card from './Card';
-function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('/');
-  const [cards, setCards] = useState([]);
+  const currentUser = useContext(CurrentUserContext);
   const cardsElements = cards.map((item) => {
     return (
       <li key={item._id}>
