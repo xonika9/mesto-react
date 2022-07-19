@@ -12,6 +12,11 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
   function handleClick() {
     onCardClick({ src: card.link, title: card.name });
   }
+  function handleLikeClick() {
+    onCardLike(card);
+  }
+  function handleDeleteClick() {
+    onCardDelete(card._id);
   }
   return (
     <div className='card'>
