@@ -1,5 +1,14 @@
 import { useContext } from 'react';
 import CurrentUserContext from '../contexts/CurrentUserContext';
+  const currentUser = useContext(CurrentUserContext);
+  const isOwn = card.owner._id === currentUser._id;
+  const cardDeleteButtonClassName = `card__remove${
+    isOwn ? '' : ' card__remove_disabled'
+  }`;
+  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const cardLikeButtonClassName = `card__like ${
+    isLiked ? 'card__like_active' : ''
+  }`;
   function handleClick() {
     onCardClick({ src, title });
   }
