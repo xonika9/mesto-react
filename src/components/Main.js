@@ -18,16 +18,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
       </li>
     );
   });
-  useEffect(() => {
-    Promise.all([api.getProfileInfo(), api.getInitialCards()])
-      .then(([profileInfo, cards]) => {
-        setUserName(profileInfo.name);
-        setUserDescription(profileInfo.about);
-        setUserAvatar(profileInfo.avatar);
-        setCards(cards);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  
   return (
     <main className='content'>
       <section className='profile'>
