@@ -1,4 +1,5 @@
-function Card({ src, title, likes, onCardClick }) {
+import { useContext } from 'react';
+import CurrentUserContext from '../contexts/CurrentUserContext';
   function handleClick() {
     onCardClick({ src, title });
   }
