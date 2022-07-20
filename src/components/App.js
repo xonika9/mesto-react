@@ -48,16 +48,13 @@ function App() {
     selectedCard;
   useEffect(() => {
     const handleEscClose = (e) => {
-      console.log('esc');
       if (e.key === 'Escape') {
         closeAllPopups();
       }
     };
     if (isOpened) {
-      console.log('add');
       document.addEventListener('keydown', handleEscClose);
       return () => {
-        console.log('remove');
         document.removeEventListener('keydown', handleEscClose);
       };
     }
