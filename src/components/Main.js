@@ -41,7 +41,7 @@ function Main({
                 type='button'
                 aria-label='Редактировать'
                 onClick={onEditProfile}
-              ></button>
+              />
             </div>
             <p className='profile__about'>{currentUser.about}</p>
           </div>
@@ -51,7 +51,7 @@ function Main({
           type='button'
           aria-label='Добавить'
           onClick={onAddPlace}
-        ></button>
+        />
       </section>
       <ul className='elements'>{cardsElements}</ul>
     </main>

@@ -17,11 +17,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [isProfileFormLoading, setIsProfileLoading] = useState(false);
-  const [isAvatarFormLoading, setIsAvatarFormLoading] = useState(false);
-  const [isAddPlaceFormLoading, setIsAddPlaceFormLoading] = useState(false);
-  const [isConfirmationFormLoading, setConfirmationFormLoading] =
-    useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([userData, cards]) => {
@@ -64,7 +60,7 @@ function App() {
     }
   }, []);
   const handleUpdateUser = ({ name, about }) => {
-    setIsProfileLoading(true);
+    setIsLoading(true);
     api
       .setUserInfo({ name, about })
       .then((userData) => {
@@ -72,10 +68,10 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => console.log(err))
-      .finally(() => setIsProfileLoading(false));
+      .finally(() => setIsLoading(false));
   };
   const handleUpdateAvatar = ({ avatar }) => {
-    setIsAvatarFormLoading(true);
+    setIsLoading(true);
     api
       .setAvatar({ avatar })
       .then((userData) => {
@@ -83,10 +79,10 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => console.log(err))
-      .finally(() => setIsAvatarFormLoading(false));
+      .finally(() => setIsLoading(false));
   };
   const handleAddPlaceSubmit = ({ title, link }) => {
-    setIsAddPlaceFormLoading(true);
+    setIsLoading(true);
     api
       .addCard({ title, link })
       .then((newCard) => {
@@ -94,12 +90,12 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => console.log(err))
-      .finally(() => setIsAddPlaceFormLoading(false));
+      .finally(() => setIsLoading(false));
   };
   const handleCardDelete = (cardId) => setCardToDelete(cardId);
 
   const handleConfirmDeletion = (cardId) => {
-    setConfirmationFormLoading(true);
+    setIsLoading(true);
     api
       .removeCard(cardId)
       .then(() => {
@@ -107,7 +103,7 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => console.log(err))
-      .finally(() => setConfirmationFormLoading(false));
+      .finally(() => setIsLoading(false));
   };
   const handleCardClick = ({ src, title }) => setSelectedCard({ src, title });
   const handleCardLike = (card) => {
@@ -141,28 +137,28 @@ function App() {
             onClose={closeAllPopups}
             onOverlay={handleOverlayClick}
             onUpdateUser={handleUpdateUser}
-            isLoading={isProfileFormLoading}
+            isLoading={isLoading}
           />
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onOverlay={handleOverlayClick}
             onUpdateAvatar={handleUpdateAvatar}
-            isLoading={isAvatarFormLoading}
+            isLoading={isLoading}
           />
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onOverlay={handleOverlayClick}
             onAddPlace={handleAddPlaceSubmit}
-            isLoading={isAddPlaceFormLoading}
+            isLoading={isLoading}
           />
           <ConfirmationPopup
             card={cardToDelete}
             onClose={closeAllPopups}
             onOverlay={handleOverlayClick}
             onConfirmDeletion={handleConfirmDeletion}
-            isLoading={isConfirmationFormLoading}
+            isLoading={isLoading}
           />
           <ImagePopup
             card={selectedCard}
