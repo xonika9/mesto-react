@@ -86,7 +86,22 @@ function App() {
       .catch((err) => console.log(err))
       .finally(() => setIsAddPlaceFormLoading(false));
   };
+  const handleCardDelete = (cardId) => setCardToDelete(cardId);
 
+  const handleConfirmDeletion = (cardId) => {
+    setConfirmationFormLoading(true);
+    api
+      .removeCard(cardId)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== cardId));
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setConfirmationFormLoading(false));
+  };
+  const handleCardClick = ({ src, title }) => setSelectedCard({ src, title });
+  const handleCardLike = (card) => {
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
     api
       .toggleLike(card._id, isLiked)
       .then((newCard) => {
@@ -95,7 +110,7 @@ function App() {
         );
       })
       .catch((err) => console.log(err));
-  }
+  };
   return (
     <div className='page'>
       <div className='page__container'>
