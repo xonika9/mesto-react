@@ -30,10 +30,29 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setSelectedCard({});
   };
-  function handleCardClick({ src, title }) {
-    setSelectedCard({ src, title });
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      closeAllPopups();
   }
-  function handleCardLike(card) {
+  };
+  const isOpened =
+    isEditProfilePopupOpen ||
+    isAddPlacePopupOpen ||
+    isEditAvatarPopupOpen ||
+    selectedCard;
+  useEffect(() => {
+    const handleEscClose = (e) => {
+      if (e.key === 'Escape') {
+        closeAllPopups();
+      }
+    };
+    if (isOpened) {
+      document.addEventListener('keydown', handleEscClose);
+      return () => {
+        document.removeEventListener('keydown', handleEscClose);
+      };
+    }
+  }, []);
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     api
