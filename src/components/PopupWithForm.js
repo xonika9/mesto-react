@@ -5,8 +5,9 @@ function PopupWithForm({
   children,
   isOpened,
   onClose,
+  onOverlay,
   onSubmit,
-  isLoading,
+  buttonContent,
   isValid,
 }) {
   return (
@@ -14,6 +15,7 @@ function PopupWithForm({
       className={`popup popup_type_${name}${
         isOpened ? ' popup_is-opened' : ''
       }`}
+      onClick={onOverlay}
     >
       <div className='popup__content'>
         <button
@@ -38,7 +40,7 @@ function PopupWithForm({
             disabled={!isValid}
             aria-label={acceptMessage}
           >
-            {isLoading ? 'Сохранение...' : acceptMessage}
+            {buttonContent}
           </button>
         </form>
       </div>
