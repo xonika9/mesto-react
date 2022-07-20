@@ -21,13 +21,28 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   }
   return (
     <div className='card'>
-      <img className='card__photo' src={src} alt={title} onClick={handleClick} />
-      <button className='card__remove' type='button' aria-label='Удалить'></button>
+      <img
+        className='card__photo'
+        src={card.link}
+        alt={card.name}
+        onClick={handleClick}
+      />
+      <button
+        className={cardDeleteButtonClassName}
+        type='button'
+        aria-label='Удалить'
+        onClick={handleDeleteClick}
+      ></button>
       <div className='card__caption'>
-        <h2 className='card__title'>{title}</h2>
+        <h2 className='card__title'>{card.name}</h2>
         <div className='card__like-group'>
-          <button className='card__like' type='button' aria-label='Нравится'></button>
-          <span className='card__like-counter'>{likes}</span>
+          <button
+            className={cardLikeButtonClassName}
+            type='button'
+            aria-label='Нравится'
+            onClick={handleLikeClick}
+          ></button>
+          <span className='card__like-counter'>{card.likes.length}</span>
         </div>
       </div>
     </div>
