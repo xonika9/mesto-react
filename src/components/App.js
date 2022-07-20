@@ -14,7 +14,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [cardToDelete, setCardToDelete] = useState(null);
-  const [selectedCard, setSelectedCard] = useState({});
+  const [selectedCard, setSelectedCard] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +33,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard({});
+    setSelectedCard(false);
     setCardToDelete(null);
   };
   const handleOverlayClick = (e) => {
@@ -48,17 +48,20 @@ function App() {
     selectedCard;
   useEffect(() => {
     const handleEscClose = (e) => {
+      console.log('esc');
       if (e.key === 'Escape') {
         closeAllPopups();
       }
     };
     if (isOpened) {
+      console.log('add');
       document.addEventListener('keydown', handleEscClose);
       return () => {
+        console.log('remove');
         document.removeEventListener('keydown', handleEscClose);
       };
     }
-  }, []);
+  }, [isOpened]);
   const handleUpdateUser = ({ name, about }) => {
     setIsLoading(true);
     api
