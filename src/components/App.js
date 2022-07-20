@@ -14,7 +14,14 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [cardToDelete, setCardToDelete] = useState(null);
   const [selectedCard, setSelectedCard] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
+  const [isProfileFormLoading, setIsProfileLoading] = useState(false);
+  const [isAvatarFormLoading, setIsAvatarFormLoading] = useState(false);
+  const [isAddPlaceFormLoading, setIsAddPlaceFormLoading] = useState(false);
+  const [isConfirmationFormLoading, setConfirmationFormLoading] =
     useState(false);
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
