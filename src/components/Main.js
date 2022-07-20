@@ -1,33 +1,41 @@
 import { useContext } from 'react';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import Card from './Card';
+function Main({
+  onEditAvatar,
+  onEditProfile,
+  onAddPlace,
+  onCardClick,
+  cards,
+  onCardLike,
+  onCardDelete,
+}) {
   const currentUser = useContext(CurrentUserContext);
   const cardsElements = cards.map((item) => {
     return (
       <li key={item._id}>
         <Card
-          src={item.link}
-          title={item.name}
-          likes={item.likes.length}
+          card={item}
           onCardClick={onCardClick}
+          onCardLike={onCardLike}
+          onCardDelete={onCardDelete}
         />
       </li>
     );
   });
-  
   return (
     <main className='content'>
       <section className='profile'>
         <div className='profile__info'>
           <a
             className='profile__avatar'
-            style={{ backgroundImage: `url(${userAvatar})` }}
+            style={{ backgroundImage: `url(${currentUser.avatar})` }}
             href='#'
             onClick={onEditAvatar}
           ></a>
           <div className='profile__text'>
             <div className='profile__title'>
-              <h1 className='profile__name'>{userName}</h1>
+              <h1 className='profile__name'>{currentUser.name}</h1>
               <button
                 className='profile__edit-button'
                 type='button'
@@ -35,7 +43,7 @@ import Card from './Card';
                 onClick={onEditProfile}
               ></button>
             </div>
-            <p className='profile__about'>{userDescription}</p>
+            <p className='profile__about'>{currentUser.about}</p>
           </div>
         </div>
         <button
