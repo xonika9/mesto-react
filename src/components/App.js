@@ -15,15 +15,18 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
-  const handleEditAvatarClick = () => {
-    setIsEditAvatarPopupOpen(true);
-  };
-  const handleEditProfileClick = () => {
-    setIsEditProfilePopupOpen(true);
-  };
-  const handleAddPlaceClick = () => {
-    setIsAddPlacePopupOpen(true);
-  };
+    useState(false);
+  useEffect(() => {
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
+      .then(([userData, cards]) => {
+        setCurrentUser(userData);
+        setCards(cards);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  const handleEditAvatarClick = () => setIsEditAvatarPopupOpen(true);
+  const handleEditProfileClick = () => setIsEditProfilePopupOpen(true);
+  const handleAddPlaceClick = () => setIsAddPlacePopupOpen(true);
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
