@@ -53,7 +53,39 @@ function App() {
       };
     }
   }, []);
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const handleUpdateUser = ({ name, about }) => {
+    setIsProfileLoading(true);
+    api
+      .setUserInfo({ name, about })
+      .then((userData) => {
+        setCurrentUser(userData);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsProfileLoading(false));
+  };
+  const handleUpdateAvatar = ({ avatar }) => {
+    setIsAvatarFormLoading(true);
+    api
+      .setAvatar({ avatar })
+      .then((userData) => {
+        setCurrentUser(userData);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsAvatarFormLoading(false));
+  };
+  const handleAddPlaceSubmit = ({ title, link }) => {
+    setIsAddPlaceFormLoading(true);
+    api
+      .addCard({ title, link })
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsAddPlaceFormLoading(false));
+  };
 
     api
       .toggleLike(card._id, isLiked)
